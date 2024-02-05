@@ -37,3 +37,35 @@ const ENV = process.env.APP_ENVIRONMENT || 'production';
 ```
 
 Now we can rebuild the image. 
+
+---
+
+## Uploading to AWS Elastic Container Registry 
+
+1. Through the AWS Console > ECR > 'Create a Repository/get started'
+2. Create a private repository, name it, leaving other settings as default 
+3. Take the following steps to authenticate and push image to your ECR repository:
+
+- Retrieve an authentication token and authenticate your Docker client to your registry.
+
+```
+aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin <CHANGE ME>
+```
+
+- Build your Docker image using the following command.
+
+```
+docker build -t <YOUR IMAGE NAME>
+```
+
+- After the build completes, tag your image so you can push the image to this repository
+-
+```
+docker tag <YOUR LOCAL IMAGE NAME>:<YOUR LOCAL TAG> <YOUR ECR URI>:<YOUR TAG IN ECR>
+```
+
+- Run the following command to push this image to your newly created AWS repository:
+
+```
+docker push <YOUR ECR URI>:<YOUR TAG IN ECR>
+```
