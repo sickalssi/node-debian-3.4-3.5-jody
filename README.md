@@ -59,7 +59,7 @@ docker build -t <YOUR IMAGE NAME>
 ```
 
 - After the build completes, tag your image so you can push the image to this repository
--
+
 ```
 docker tag <YOUR LOCAL IMAGE NAME>:<YOUR LOCAL TAG> <YOUR ECR URI>:<YOUR TAG IN ECR>
 ```
